@@ -12,6 +12,9 @@ export default props =>
             <Link to="/orders">
                 <i className="fa fa-list-alt"></i> Ordens
             </Link>
+            <Link to="/transactions">
+                <i className="fa fa-list-alt"></i> Transacoes
+            </Link>
         </nav>
     </aside>
 )

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/TableOrdens.css'
+import '../css/TableTransacoes.css'
 import axios from 'axios';
 import {NotificationManager} from 'react-notifications';
 
@@ -9,12 +9,12 @@ export default class TableOrdens extends React.Component{
         this.state = {
             data : []
         }
-        this.listProdutos = this.listOrdens.bind(this)
-        this.listOrdens()
+        this.listTransacoes = this.listTransacoes.bind(this)
+        this.listTransacoes()
     }
 
-    listOrdens(){
-        axios.get(this.props.baseUrl+"ordens/").then(function(cb){
+    listTransacoes(){
+        axios.get(this.props.baseUrl+"transacoes/").then(function(cb){
             this.setState({data : cb.data})
         }.bind(this)).catch(function(response){
             console.log(response)
@@ -22,33 +22,33 @@ export default class TableOrdens extends React.Component{
 
      };
 
-    deleteOrdem(ordem){
-        axios.delete(this.props.baseUrl+"ordens/"+ordem.id).then(function(cb){
-            NotificationManager.success('Ordem excluida com sucesso.','',2000)
+    deleteTransacao(transacao){
+        axios.delete(this.props.baseUrl+"transacoes/"+transacao.id).then(function(cb){
+            NotificationManager.success('Transacao excluida com sucesso.','',2000)
             
-            this.listOrdens();
+            this.listTransacoes();
         }.bind(this)).catch(function(response){
             NotificationManager.warning(response.message,'',2000)
         });
     };
 
-    noOrders(){
+    noTransacoes(){
         if(this.state.data.length === 0)
-            return <p className="text-center no-orders">Não há nenhuma ORDEM cadastrada</p>
+            return <p className="text-center no-transactions">Não há nenhuma TRANSACAO cadastrada</p>
     }
 
     renderRows(){
         if(this.state.data.length > 0)
-            return this.state.data.map(ordem=>(
-                    <tr key={ordem.id}>
-                        <td>{ordem.operacao}</td>
-                        <td>{ordem.ativo.codigo}</td>
-                        <td>{ordem.valor}</td>
-                        <td>{ordem.quantidade}</td>
-                        <td>{ordem.data}</td>
-                        <td>{ordem.corretora.nome}</td>
+            return this.state.data.map(transacao=>(
+                    <tr key={transacao.id}>
+                        <td>{transacao.ativo.codigo}</td>
+                        <td>{transacao.valor}</td>
+                        <td>{transacao.quantidade}</td>
+                        <td>{transacao.data}</td>
+                        <td>{transacao.venda.corretora.nome}</td>
+                        <td>{transacao.compra.corretora.nome}</td>
                         <td className="text-center">
-                        <button type="button" className="btn btn-danger d-inline ml-2" onClick={(e) => this.deleteOrdem(ordem, e)}> <i className="fa fa-trash"/></button>
+                        <button type="button" className="btn btn-danger d-inline ml-2" onClick={(e) => this.deleteTransacao(transacao, e)}> <i className="fa fa-trash"/></button>
                         </td>
                     </tr>
                 )
@@ -61,12 +61,12 @@ export default class TableOrdens extends React.Component{
                 <table className="table">
                     <thead className="thead-dark">
                         <tr>
-                            <th scope="col">Operação</th>
                             <th scope="col">Ativo</th>
                             <th scope="col" >Valor</th>
                             <th scope="col" >Quantidade</th>
                             <th scope="col" >Data</th>
-                            <th scope="col" >Corretora</th>
+                            <th scope="col" >Vendedora</th>
+                            <th scope="col" >Compradora</th>
                             <th scope="col" className="text-center">Ações</th>
                         </tr>
                     </thead>
@@ -74,7 +74,7 @@ export default class TableOrdens extends React.Component{
                         {this.renderRows()}
                     </tbody>
                 </table>
-                {this.noOrders()}
+                {this.noTransacoes()}
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Main from '../template/Main'
-import TableOrdens from './components/TableOrdens';
+import TableOrdens from './components/TableTransacoes';
 
 const headerProps = {
     icon: 'list-alt',
