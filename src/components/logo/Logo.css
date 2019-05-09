@@ -3,6 +3,9 @@ aside.logo{
     display: flex;
     justify-content: left;
     align-items: left;
+    
+    width: 225px;
+    position: fixed;
 }
 
 aside.logo img{

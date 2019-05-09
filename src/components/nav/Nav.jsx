@@ -9,6 +9,9 @@ export default props =>
             <Link to="/">
                 <i className="fa fa-home"></i> Início
             </Link>
+            <Link to="/assets">
+                <i className="fa fa-list-alt"></i> Ativos
+            </Link>
             <Link to="/orders">
                 <i className="fa fa-list-alt"></i> Ordens
             </Link>

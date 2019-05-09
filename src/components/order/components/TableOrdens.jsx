@@ -9,7 +9,7 @@ export default class TableOrdens extends React.Component{
         this.state = {
             data : []
         }
-        this.listProdutos = this.listOrdens.bind(this)
+        this.listOrdens = this.listOrdens.bind(this)
         this.listOrdens()
     }
 

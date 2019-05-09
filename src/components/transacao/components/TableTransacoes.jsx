@@ -3,7 +3,7 @@ import '../css/TableTransacoes.css'
 import axios from 'axios';
 import {NotificationManager} from 'react-notifications';
 
-export default class TableOrdens extends React.Component{
+export default class TableTransacoes extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
