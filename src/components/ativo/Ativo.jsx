@@ -8,7 +8,7 @@ const headerProps = {
     title: 'Ativos'
 }
 
-const baseUrl = "http://localhost:8080/"
+const baseUrl = "https://bolsa-app-back.herokuapp.com/"
 export default class UserCrud extends Component {
     constructor(props){
         super(props)

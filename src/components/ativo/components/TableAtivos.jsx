@@ -39,7 +39,7 @@ export default class TableAtivos extends React.Component{
     }
 
     renderRows(){
-        let baseUrl = "http://localhost:8080/"
+        let baseUrl = "https://bolsa-app-back.herokuapp.com/"
         if(this.state.data.length > 0)
             return this.state.data.map(ativo=>(
                     <tr key={ativo.codigo}>
