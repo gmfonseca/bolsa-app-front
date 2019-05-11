@@ -32,7 +32,7 @@ export default class InfoCrud extends Component {
             <Main {...headerProps}>
             
                 <div className="p-3 mt-3">
-                    <InfoDate baseUrl="https://bolsa-app-back.herokuapp.com/info" classButton="btn btn-dark center-block" classIcon="fa fa-search" iconContent="Buscar data"/>
+                    <InfoDate baseUrl="https://bolsa-app.herokuapp.com/info" classButton="btn btn-dark center-block" classIcon="fa fa-search" iconContent="Buscar data"/>
                 </div>
                 <div className="p-3 mt-3">
                     <TableOrdens baseUrl={baseUrl} date={this.state.dateTime} ref={this.child}/>
