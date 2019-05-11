@@ -72,6 +72,7 @@ export default class TableAtivos extends React.Component{
                     </tbody>
                 </table>
                 {this.noAssets()}
+                <br/>
             </div>
         )
     }
