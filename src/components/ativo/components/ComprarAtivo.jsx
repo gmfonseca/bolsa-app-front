@@ -3,14 +3,14 @@ import Popup from "reactjs-popup";
 import Input from "../../template/Input"
 import axios from 'axios'
 import {NotificationManager} from 'react-notifications';
-import '../../template/Input.css'
+import '../css/Input.css'
 
 export default class FieldAdd extends React.Component {
     constructor(props) {
       super(props)
       this.state = { 
         open: false,
-        corretora: '',
+        nome: '',
         codigo: '',
         descricao: ''
       }
@@ -19,7 +19,6 @@ export default class FieldAdd extends React.Component {
       this.changeState = this.changeState.bind(this)
       this.saveAtivo = this.saveAtivo.bind(this)
     }
-
     openModal (){
       this.setState({ open: true })
     }
@@ -34,8 +33,8 @@ export default class FieldAdd extends React.Component {
       })
     }
 
-    saveAtivo () {
-      axios.post(this.props.baseUrl+'ordens/?operacao='+this.props.operacao+'&quantidade='+this.state.quantidade +'&valor='+this.state.valor+'&ativoId='+this.props.ativo+'&corretoraNome=' + this.state.corretora,{
+    getInfo () {
+      axios.get(this.props.baseUrl+'info?dateTime='+this.state.dateTime, {
           // nome : this.state.nome,
           // codigo : this.state.codigo,
           // descricao : this.state.descricao
@@ -51,19 +50,22 @@ export default class FieldAdd extends React.Component {
     render() {
       return (
         <div className="d-inline">
-        <button type="button" className={this.props.classButton} onClick={this.openModal}> <i className={this.props.classIcon}/>  {this.props.name}</button>
-          <Popup open={this.state.open} closeOnDocumentClick onClose={this.closeModal} >
+        <button type="button" className={this.props.classButton} onClick={this.openModal}> <i className={this.props.classIcon}/>  {this.props.iconContent}</button>
+          <Popup
+            open={this.state.open}
+            closeOnDocumentClick
+            onClose={this.closeModal}
+          >
             <div className="popup">
-                <div className="header"> <h5>{this.props.ativo}</h5> </div>
+                <div className="header"> <h5>Ativo</h5> </div>
                 <form method="POST" id="form">
                   <div className="form-group content col-xs-4">
-                      <Input type="corretora" description="Corretora" placeholder={this.props.corretora} changeState={this.changeState}></Input>
-                      <Input type="quantidade" description="Quantidade" placeholder={this.props.codigo} changeState={this.changeState}></Input>
-                      <Input type="valor" description="Valor" placeholder={this.props.descricao} changeState={this.changeState}></Input>
+                      <Input type="date" description="Nome" placeholder={this.props.nome} changeState={this.changeState}></Input>
+                      <Input type="codigo" description="Codigo" placeholder={this.props.codigo} changeState={this.changeState}></Input>
                   </div>
                 </form>
                 <div className="actions">
-                    <button type="button" className="btn btn-info left-block buttonAdd" onClick={this.saveAtivo}> Salvar </button>
+                    <button type="button" className="btn btn-info left-block buttonAdd" onClick={this.getInfo}> Salvar </button>
                 </div>
                 <a className="close" onClick={this.closeModal}>
                     &times;

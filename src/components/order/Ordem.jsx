@@ -22,7 +22,12 @@ export default class UserCrud extends Component {
     render(){
         return(
             <Main {...headerProps}>
-                <TableOrdens baseUrl={baseUrl} ref={this.child}/>
+                <div className="p-3 mt-3">
+                    <TableOrdens title="COMPRA" baseUrl={baseUrl} ref={this.child}/>
+                </div>
+                <div className="p-3 mt-3">
+                    <TableOrdens title="VENDA" baseUrl={baseUrl} ref={this.child}/>
+                </div>
             </Main>
         )
     }

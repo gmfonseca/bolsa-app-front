@@ -1,8 +1,19 @@
 .table{
-    margin-top: 1em
+    margin-top: 10em
   }
 
 .no-orders{
   margin: 1em;
   text-align: center;
+}
+
+.venda{
+  background: #F44336;
+  margin-top: 50px;
+  padding-top: 50px;
+}
+.compra{
+  background: #4CAF50;
+  margin: 10em;
+
 }

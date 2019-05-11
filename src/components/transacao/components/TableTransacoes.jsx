@@ -40,16 +40,13 @@ export default class TableTransacoes extends React.Component{
     renderRows(){
         if(this.state.data.length > 0)
             return this.state.data.map(transacao=>(
-                    <tr key={transacao.id}>
+                    <tr className="transaction" key={transacao.id}>
                         <td>{transacao.ativo.codigo}</td>
                         <td>{transacao.valor}</td>
                         <td>{transacao.quantidade}</td>
                         <td>{transacao.data}</td>
                         <td>{transacao.venda.corretora.nome}</td>
                         <td>{transacao.compra.corretora.nome}</td>
-                        <td className="text-center">
-                        <button type="button" className="btn btn-danger d-inline ml-2" onClick={(e) => this.deleteTransacao(transacao, e)}> <i className="fa fa-trash"/></button>
-                        </td>
                     </tr>
                 )
             )
@@ -67,7 +64,6 @@ export default class TableTransacoes extends React.Component{
                             <th scope="col" >Data</th>
                             <th scope="col" >Vendedora</th>
                             <th scope="col" >Compradora</th>
-                            <th scope="col" className="text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,6 +71,7 @@ export default class TableTransacoes extends React.Component{
                     </tbody>
                 </table>
                 {this.noTransacoes()}
+                <br/>
             </div>
         )
     }

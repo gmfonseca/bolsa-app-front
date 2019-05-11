@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/TableOrdens.css'
 import axios from 'axios';
-import {NotificationManager} from 'react-notifications';
+// import {NotificationManager} from 'react-notifications';
 
 export default class TableOrdens extends React.Component{
     constructor(props) {
@@ -9,57 +9,63 @@ export default class TableOrdens extends React.Component{
         this.state = {
             data : []
         }
-        this.listOrdens = this.listOrdens.bind(this)
-        this.listOrdens()
+        this.listInfos = this.listInfos.bind(this)
+        this.listInfos()
     }
 
-    listOrdens(){
-        axios.get(this.props.baseUrl+"ordens/" + this.props.title.toLowerCase()).then(function(cb){
+    listInfos(){
+        axios.get(this.props.baseUrl + "transacoes/info?dateTime=" + this.props.date).then(function(cb){
             this.setState({data : cb.data})
         }.bind(this)).catch(function(response){
             console.log(response)
         });
+    };
 
-     };
-
-    noOrders(){
+    noInfo(){
         if(this.state.data.length === 0)
-            return <p className="text-center no-orders">Não há nenhuma ORDEM cadastrada</p>
+            return <p className="text-center no-info">Não há nenhuma TRANSACAO cadastrada na data informada</p>
     }
 
     renderRows(){
         if(this.state.data.length > 0)
-            return this.state.data.map(ordem=>(
-                    <tr className={ordem.operacao.toLowerCase()} key={ordem.id}>
-                        <td>{ordem.ativo.codigo}</td>
-                        <td>{ordem.valor}</td>
-                        <td>{ordem.quantidade}</td>
-                        <td>{ordem.data}</td>
-                        <td>{ordem.corretora.nome}</td>
+            return this.state.data.map(info=>(
+                    <tr className="transaction" key={info.id}>
+                        <td>{info.ativo.codigo}</td>
+                        <td>{info.valor}</td>
+                        <td>{info.quantidade}</td>
+                        <td>{info.compra.corretora.nome}</td>
+                        <td>{info.compra.corretora.nome}</td>
                     </tr>
                 )
             )
     }
 
+    date(){
+        if(this.props.date){
+            
+            return ' (' + this.props.date + ')'
+        }
+    }
+
     render(){
         return(
             <div>
-                <h1>{this.props.title}</h1>
+                <h1>Transações {this.date()}</h1>
                 <table className="table">
                     <thead className="thead-dark">
                         <tr>
                             <th scope="col">Ativo</th>
                             <th scope="col" >Valor</th>
                             <th scope="col" >Quantidade</th>
-                            <th scope="col" >Data</th>
-                            <th scope="col" >Corretora</th>
+                            <th scope="col" >Vendedora</th>
+                            <th scope="col" >Compradora</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.renderRows()}
                     </tbody>
                 </table>
-                {this.noOrders()}
+                {this.noInfo()}
             </div>
         )
     }

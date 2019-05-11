@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Main from '../template/Main'
-import AddAtivo from './components/AddAtivo';
 import TableAtivos from './components/TableAtivos';
+import InfoDate from '../info/components/InfoDate';
 
 const headerProps = {
     icon: 'list-alt',
@@ -23,7 +23,7 @@ export default class UserCrud extends Component {
     render(){
         return(
             <Main {...headerProps}>
-                <AddAtivo baseUrl={baseUrl} classButton="btn btn-dark center-block" classIcon="fa fa-plus" iconContent="Novo Ativo" listAtivos={this.listAtivos}/>
+
                 <TableAtivos baseUrl={baseUrl} ref={this.child}/>
             </Main>
         )

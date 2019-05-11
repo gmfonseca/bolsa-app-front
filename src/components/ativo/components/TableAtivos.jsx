@@ -1,5 +1,6 @@
 import React from 'react'
 import '../css/TableAtivos.css'
+import AddAtivo from './AddAtivo.jsx'
 import axios from 'axios';
 import {NotificationManager} from 'react-notifications';
 
@@ -22,8 +23,8 @@ export default class TableAtivos extends React.Component{
 
      };
 
-    deleteAtivo(ativo){
-        axios.delete(this.props.baseUrl+"ativos/"+ativo.codigo).then(function(cb){
+    comprarAtivo(ativo){
+        axios.post(this.props.baseUrl+"ordens/?").then(function(cb){
             NotificationManager.success('Ativo excluido com sucesso.','',2000)
             
             this.listAtivos();
@@ -38,14 +39,16 @@ export default class TableAtivos extends React.Component{
     }
 
     renderRows(){
+        let baseUrl = "http://localhost:8080/"
         if(this.state.data.length > 0)
             return this.state.data.map(ativo=>(
                     <tr key={ativo.codigo}>
                         <td>{ativo.nome}</td>
                         <td>{ativo.codigo}</td>
-                        <td>{ativo.descricao}</td>
+                        <td>{(ativo.descricao.length > 50) ? ativo.descricao.substring(0, 47)+"..." : ativo.descricao}</td>
                         <td className="text-center">
-                        <button type="button" className="btn btn-danger d-inline ml-2" onClick={(e) => this.deleteAtivo(ativo, e)}> <i className="fa fa-trash"/></button>
+                            <span><AddAtivo baseUrl={baseUrl} classButton="btn btn-success d-inline ml-2" operacao="COMPRA" name="Comprar" ativo={ativo.codigo}/></span>
+                            <span><AddAtivo baseUrl={baseUrl} classButton="btn btn-danger d-inline ml-2" operacao="VENDA" name="Vender" ativo={ativo.codigo}/></span>
                         </td>
                     </tr>
                 )

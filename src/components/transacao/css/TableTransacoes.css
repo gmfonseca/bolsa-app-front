@@ -6,3 +6,6 @@
   margin: 1em;
   text-align: center;
 }
+tr.transaction{
+  background: #64B5F6;
+}

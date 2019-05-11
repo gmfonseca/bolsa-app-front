@@ -1,0 +1,12 @@
+.table{
+    margin-top: 5em
+  }
+
+tr.transaction{
+  background: #64B5F6;
+}
+
+.no-info{
+  margin: 1em;
+  text-align: center;
+}
